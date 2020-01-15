@@ -1,6 +1,17 @@
 package com.app.pojos;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "copies")
@@ -9,8 +20,9 @@ public class Copies {
 	private Books copyBookId;
 	private String copyRack;
 	private String copyStatus;
+	private List<IssueRecord> issueRecordList ;
 	public Copies() {
-		// TODO Auto-generated constructor stub
+		System.out.println("in copies pojo");
 	}
 	public Copies(Books copyBookId, String copyRack, String copyStatus) {
 		super();
@@ -27,6 +39,7 @@ public class Copies {
 	public void setCopyId(Integer copyId) {
 		this.copyId = copyId;
 	}
+	
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	public Books getCopyBookId() {
@@ -48,6 +61,14 @@ public class Copies {
 	}
 	public void setCopyStatus(String copyStatus) {
 		this.copyStatus = copyStatus;
+	}
+	
+	@OneToMany(mappedBy = "copyId" ,cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<IssueRecord> getIssueRecordList() {
+		return issueRecordList;
+	}
+	public void setIssueRecordList(List<IssueRecord> issueRecordList) {
+		this.issueRecordList = issueRecordList;
 	}
 	@Override
 	public String toString() {

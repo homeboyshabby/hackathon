@@ -16,7 +16,7 @@ public class Books {
 	private List<Copies> copiesList = new ArrayList<>();
 	private long bookIsbn;
 	public Books() {
-		// TODO Auto-generated constructor stub
+		System.out.println("in books pojo");
 	}
 	public Books(String bookName, String bookAuthor, String bookSubject, double bookPrice, long bookIsbn) {
 		super();
@@ -71,10 +71,10 @@ public class Books {
 		this.bookIsbn = bookIsbn;
 	}
 	@OneToMany(mappedBy = "copyBookId",orphanRemoval = true,cascade = CascadeType.ALL)
-	public List<Copies> getCopies() {
+	public List<Copies> getcopiesList() {
 		return copiesList;
 	}
-	public void setCopies(List<Copies> copies) {
+	public void setcopiesList(List<Copies> copies) {
 		this.copiesList = copies;
 	}
 	@Override
